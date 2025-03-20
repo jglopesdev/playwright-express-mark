@@ -1,25 +1,30 @@
 import { test, expect } from '@playwright/test'
 
+import { TaskModel } from './fixtures/task.model'
+
 test('deve poder cadastrar uma nova tarefa', async ({ page, request }) => {
 
-    const taskName = 'Ler um livro de Typescript'
+    const task: TaskModel = {
+        name: 'Ler um livro de Typescript',
+        is_done: false
+    }
 
-    await request.delete('http://localhost:3333/helper/tasks/' + taskName)
+    await request.delete('http://localhost:3333/helper/tasks/' + task.name)
 
     await page.goto('http://localhost:8080')
 
     const inputTaskName = page.locator('input[class*=InputNewTask]')
-    await inputTaskName.fill(taskName)
+    await inputTaskName.fill(task.name)
 
     await page.click('css=button >> text=Create')
 
-    const target = page.locator(`css=.task-item p >> text=${taskName}`)
+    const target = page.locator(`css=.task-item p >> text=${task.name}`)
     await expect(target).toBeVisible()
 })
 
-test.only('nao deve permitir tarefa duplicada', async ({ page, request }) => {
+test('nao deve permitir tarefa duplicada', async ({ page, request }) => {
 
-    const task = {
+    const task: TaskModel = {
         name: 'Criar artigo no Medium',
         is_done: false
     }
