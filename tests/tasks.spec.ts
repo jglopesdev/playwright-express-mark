@@ -1,6 +1,10 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, APIRequestContext } from '@playwright/test'
 
 import { TaskModel } from './fixtures/task.model'
+
+async function deleteTaskByHelper(request: APIRequestContext, taskName: string) {
+    await request.delete('http://localhost:3333/helper/tasks/' + taskName)
+}
 
 test('deve poder cadastrar uma nova tarefa', async ({ page, request }) => {
 
@@ -9,7 +13,7 @@ test('deve poder cadastrar uma nova tarefa', async ({ page, request }) => {
         is_done: false
     }
 
-    await request.delete('http://localhost:3333/helper/tasks/' + task.name)
+    await deleteTaskByHelper(request, task.name)
 
     await page.goto('http://localhost:8080')
 
@@ -29,7 +33,7 @@ test('nao deve permitir tarefa duplicada', async ({ page, request }) => {
         is_done: false
     }
 
-    await request.delete('http://localhost:3333/helper/tasks/' + task.name)
+    await deleteTaskByHelper(request, task.name)
 
     const newTask = await request.post('http://localhost:3333/tasks', { data: task })
     expect(newTask.ok()).toBeTruthy()
