@@ -10,5 +10,9 @@
     "required": {
         "name": "",
         "is_done": false
+    },
+    "update": {
+        "name": "Comprar a ração do cachorro",
+        "is_done": false
     }
 }
