@@ -14,5 +14,9 @@
     "update": {
         "name": "Comprar a ração do cachorro",
         "is_done": false
+    },
+    "delete": {
+        "name": "Agendar consulta com ortopedista",
+        "is_done": false
     }
 }
