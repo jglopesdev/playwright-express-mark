@@ -19,6 +19,12 @@ jobs:
         with:
           node-version: 18
 
+      - name: Install dependencies for Tests
+        run: npm install
+
+      - name: install Playwright Browsers
+        run: npx playwright install --with-deps
+        
       - name: Install dependencies (API)
         working-directory: apps/api
         run: npm install
