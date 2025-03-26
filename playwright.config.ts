@@ -34,7 +34,8 @@ export default defineConfig({
     trace: 'on-first-retry',
     headless: true,
     baseURL: process.env.BASE_URL,
-    screenshot:'only-on-failure'
+    screenshot:'only-on-failure',
+    video: "retain-on-failure"
   },
 
   /* Configure projects for major browsers */
