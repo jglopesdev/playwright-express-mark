@@ -5,6 +5,7 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
   test:
     timeout-minutes: 60
@@ -18,16 +19,37 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install dependencies (API)
+        working-directory: apps/api
         run: npm install
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Initialize database
+        working-directory: apps/api
+        run: npm run db:init
+
+      - name: Start API
+        working-directory: apps/api
+        run: npm run dev &
+
+      - name: Install dependencies (Web)
+        working-directory: apps/web
+        run: npm install
+
+      - name: Start Web Server
+        working-directory: apps/web
+        run: npm run dev &
+
+      - name: Wait for services to be ready
+        run: sleep 5
 
       - name: Run Playwright tests
+        env:
+          BASE_URL: http://localhost:8080
+          BASE_API: http://localhost:3333
         run: npx playwright test
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
