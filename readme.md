@@ -1,4 +1,4 @@
-# Cypress eXpress
+# Playwright eXpress
 
 Projeto criado a partir dos conhecimentos aprendidos durante o curso [Playwright eXpress](https://www.udemy.com/course/playwright-express/), ministrado pelo [Fernando Papito](https://www.udemy.com/user/fernando-papito/) onde  utilizei o `Playwright` para desenvolver testes E2E escritos em Typescript, para validar uma aplicação de gerenciamento de tarefas.         
 
