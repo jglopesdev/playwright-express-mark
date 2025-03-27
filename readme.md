@@ -26,9 +26,6 @@ Execute o comando `yarn dev` para colocar a aplicação Web no ar
 
 ## Testes
 
-Neste projeto, você pode executar os testes em viewports de desktop e mobile.
-
-###### Desktop
 Execute o comando `yarn playwright test tasks` (não sendo necessário colocar tasks.spec.ts, porque o Playwright já entende somente com o nome do arquivo) para executar o teste em modo headless.      
 Execute o comando `yarn playwright test tasks --ui` para executar o teste em modo interativo (UI).     
 Execute o comando `yarn playwright test tasks --headed` para executar o teste e ver toda ação sendo executada.      
